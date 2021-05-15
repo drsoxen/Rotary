@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template app</title>
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
+
+  <style>
+    .section-with-bg {
+      border-radius: 6px;
+      background: #eee;
+      padding: 1em;
+      margin: 1em;
+    }
+  </style>
+  </head>
+  <body>
+  	<div class="container">
+
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/drsoxen/NodeDustStartingPoint">Github</a>
+            </li>
+          </ul>
+        </nav>
+        <h2 class="text-muted">Node.js &amp; Dust.js Starting Point</h3>
+        <h3 class="text-muted">Features:</h3>
+      </div>
+
+      
+      {+body /}
+    </div>
+  </body>
+</html>
