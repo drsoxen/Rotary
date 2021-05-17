@@ -28,15 +28,15 @@ app.listen(3000, () => {
 });
 
 
-rpio.open(15, rpio.INPUT);
-
-setInterval(() => {
-
-	console.log('Pin 15 is currently ' + (rpio.read(15) ? 'high' : 'low'));
-	
-}, 1000);
+rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 
 
+rpio.poll(37, (pin) => {
+
+	var state = rpio.read(cbpin) ? 'released' : 'pressed';
+	console.log('Button event on P%d (button currently %s)', cbpin, state);
+
+}, rpio.POLL_LOW);
 
 
 handsetUp = () => {
