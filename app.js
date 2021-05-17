@@ -33,8 +33,8 @@ rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 
 rpio.poll(37, (pin) => {
 
-	var state = rpio.read(cbpin) ? 'released' : 'pressed';
-	console.log('Button event on P%d (button currently %s)', cbpin, state);
+	var state = rpio.read(pin) ? 'released' : 'pressed';
+	console.log('Button event on P%d (button currently %s)', pin, state);
 
 }, rpio.POLL_LOW);
 
