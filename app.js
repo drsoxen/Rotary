@@ -4,7 +4,8 @@ var express = require('express'),
     cons = require('consolidate'),
     dust = require('dustjs-helpers'),
     app = express(),
-    player = require('play-sound')(opts = {});
+    player = require('play-sound')(opts = {}),
+    rpio = require('rpio');
 
 app.engine('dust', cons.dust);
 
@@ -25,6 +26,17 @@ app.listen(3000, () => {
   console.log('Server Started On Port 3000');
 
 });
+
+
+rpio.open(15, rpio.INPUT);
+
+setInterval(() => {
+
+	console.log('Pin 15 is currently ' + (rpio.read(15) ? 'high' : 'low'));
+	
+}, 1000);
+
+
 
 
 handsetUp = () => {
