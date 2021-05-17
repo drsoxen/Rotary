@@ -39,6 +39,13 @@ rpio.poll(37, (pin) => {
 }, rpio.POLL_LOW);
 
 
+setInterval(() => {
+
+	console.log(Date.now());
+
+}, 1000);
+
+
 handsetUp = () => {
 
 	//start assistant
