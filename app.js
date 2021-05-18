@@ -37,11 +37,11 @@ rpio.poll(37, (pin) => {
 
 	if(rpio.read(pin))
 	{
-		console.log('Hook Switch Disengaged ', pin);
+		console.log('Hook Switch Engaged ', pin);
 	}
 	else
 	{
-		console.log('Hook Switch Engaged ', pin);
+		console.log('Hook Switch Disengaged ', pin);
 	}
 
 });
@@ -53,6 +53,12 @@ rpio.poll(35, (pin) => {
 
 	if(rpio.read(pin))
 	{
+		console.log('Dialer Engaged ', pin);
+		//clearInterval(DialTimerId);
+		currentDialCount *= 10;
+	}
+	else
+	{
 		console.log('Dialer Disengaged ', pin);
 		// DialTimerId = setInterval(() => {
 
@@ -62,14 +68,8 @@ rpio.poll(35, (pin) => {
 
 		console.log(currentDialCount);
 	}
-	else
-	{
-		console.log('Dialer Engaged ', pin);
-		//clearInterval(DialTimerId);
-		currentDialCount *= 10;
-	}
 
-}, rpio.POLL_LOW);
+});
 
 
 //Dialer tick
@@ -77,14 +77,14 @@ rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
 
 
-	if(! rpio.read(pin))
+	if(rpio.read(pin))
 	{
 		currentDialCount++;
 		console.log('Dial event ', pin);
 	} 
 	
 
-}, rpio.POLL_LOW);
+});
 
 DialingCompleted = (value) => {
 
