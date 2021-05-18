@@ -86,7 +86,8 @@ rpio.poll(33, (pin) => {
 
 DialingCompleted = (value) => {
 
-
+	console.log('Dial Value: ' + value);
+	
 	switch(value) {
 	  case 1:
 	    break;
