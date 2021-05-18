@@ -122,7 +122,7 @@ DialingCompleted = (value) => {
 }
 
 
-DialingCompleted(01189998819991197253)
+//DialingCompleted(01189998819991197253)
 
 
 
