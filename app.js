@@ -44,7 +44,7 @@ rpio.poll(37, (pin) => {
 		console.log('Hook Switch Engaged ', pin);
 	}
 
-}, rpio.POLL_LOW);
+});
 
 
 //Dialer Engaged
