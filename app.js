@@ -54,16 +54,18 @@ rpio.poll(35, (pin) => {
 	if(rpio.read(pin))
 	{
 		console.log('Dialer Disengaged ', pin);
-		DialTimerId = setInterval(() => {
+		// DialTimerId = setInterval(() => {
 
-		DialingCompleted(currentDialCount)
+		// DialingCompleted(currentDialCount)
 
-		}, 2000);
+		// }, 2000);
+
+		console.log(currentDialCount);
 	}
 	else
 	{
 		console.log('Dialer Engaged ', pin);
-		clearInterval(DialTimerId);
+		//clearInterval(DialTimerId);
 		currentDialCount *= 10;
 	}
 
@@ -78,7 +80,7 @@ rpio.poll(33, (pin) => {
 	if(! rpio.read(pin))
 	{
 		currentDialCount++;
-		console.log('Dial event on P%d (button currently %s)', pin);
+		console.log('Dial event ', pin);
 	} 
 	
 
