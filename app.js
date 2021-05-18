@@ -27,42 +27,62 @@ app.listen(3000, () => {
 
 });
 
+let currentDialCount = 0;
+var DialTimerId = 0;
 
+
+//Hook Switch
 rpio.open(37, rpio.INPUT, rpio.PULL_UP);
-
-
 rpio.poll(37, (pin) => {
 
-	var state = rpio.read(pin) ? 'released' : 'pressed';
-	console.log('Button event on P%d (button currently %s)', pin, state);
+	if(rpio.read(pin))
+	{
+		console.log('Hook Switch Disengaged ', pin, state);
+	}
+	else
+	{
+		console.log('Hook Switch Engaged ', pin, state);
+	}
 
 }, rpio.POLL_LOW);
 
 
-setInterval(() => {
+//Dialer Engaged
+rpio.open(35, rpio.INPUT, rpio.PULL_UP);
+rpio.poll(35, (pin) => {
 
-	console.log(Date.now());
+	if(rpio.read(pin))
+	{
+		console.log('Dialer Disengaged ', pin, state);
+		DialTimerId = setInterval(() => {
 
-}, 1000);
+		DialingCompleted(currentDialCount)
+
+		}, 2000);
+	}
+	else
+	{
+		console.log('Dialer Engaged ', pin, state);
+		clearInterval(DialTimerId);
+		currentDialCount *= 10;
+	}
+
+}, rpio.POLL_LOW);
 
 
-handsetUp = () => {
+//Dialer tick
+rpio.open(33, rpio.INPUT, rpio.PULL_UP);
+rpio.poll(33, (pin) => {
 
-	//start assistant
 
-}
+	if(! rpio.read(pin))
+	{
+		currentDialCount++;
+		console.log('Dial event on P%d (button currently %s)', pin, state);
+	} 
+	
 
-handsetDown = () => {
-
-	//end assistant
-
-}
-
-DialingStarted = () => {
-
-	//end assistant
-
-}
+}, rpio.POLL_LOW);
 
 DialingCompleted = (value) => {
 
@@ -93,11 +113,12 @@ DialingCompleted = (value) => {
 	    break;
 
 	  default:
+	  break;
 	}
 
+	currentDialCount = 0;
+
 }
-
-
 
 
 DialingCompleted(01189998819991197253)
