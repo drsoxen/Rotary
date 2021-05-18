@@ -38,6 +38,7 @@ rpio.poll(37, (pin) => {
 	if(rpio.read(pin))
 	{
 		console.log('Hook Switch Engaged');
+		currentDialCount = 0;
 	}
 	else
 	{
