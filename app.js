@@ -51,8 +51,8 @@ rpio.poll(35, (pin) => {
 //Dialer tick
 rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
-	if(BounceDetected(pin)) return;
 	if(rpio.read(pin)){
+		if(BounceDetected(pin)) return;
 		DialerTick()
 	}
 });
@@ -67,10 +67,10 @@ BounceDetected = (pin) =>{
 	let millis = Date.now();
 	let timeDiff = millis - currentTime;
 
-	// if(timeDiff < 50){
+	if(timeDiff < 50){
 		console.log('Bounce Detected On Pin: ' + pin + ' Time: ' + timeDiff);
-	// 	return true;
-	// }
+		return true;
+	}
 	currentTime = Date.now();
 
 	return false;
