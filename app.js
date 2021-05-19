@@ -94,10 +94,10 @@ DialerDisengaged = () => {
 
 DialerTick = () => {
 
-	var millis = Date.now();
+	let millis = Date.now();
 
 	currentDialCount++;
-	console.log('Dial event ' + currentDialCount + 'Time: ' + millis - currentTime);
+	console.log('Dial event ' + currentDialCount + ' Time: ' + (millis - currentTime));
 
 	currentTime = Date.now();
 }
