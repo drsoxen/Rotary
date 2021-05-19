@@ -56,7 +56,7 @@ rpio.poll(33, (pin) => {
 	}
 });
 
-BounceDetected = () =>{
+BounceDetected = (pin) =>{
 	let millis = Date.now();
 	let timeDiff = millis - currentTime;
 
