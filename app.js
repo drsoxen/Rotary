@@ -64,33 +64,30 @@ HookSwitchDisengaged = () => {
 
 DialerEngaged = () => {
 	console.log('Dialer Engaged');
-	//clearInterval(DialTimerId);	
+	clearInterval(DialTimerId);	
 }
 
 DialerDisengaged = () => {
 	console.log('Dialer Disengaged');
 
-	// DialTimerId = setInterval(() => {
-	// DialingCompleted(totalDialCount)
-	// }, 2000);
-
-	//totalDialCount *= 10;
+	DialTimerId = setInterval(() => {
+		DialingCompleted(totalDialCount);
+		clearInterval(DialTimerId);
+		totalDialCount = '';
+	}, 2000);
 
 	if(currentDialCount == 10){
 		currentDialCount = 0;
 	}
 
 	totalDialCount = totalDialCount + currentDialCount;
-
 	currentDialCount = 0;
-
 	console.log(totalDialCount);
 }
 
 DialerTick = () => {
 
 	let millis = Date.now();
-
 	let timeDiff = millis - currentTime;
 
 	if(timeDiff < 50){
@@ -98,10 +95,9 @@ DialerTick = () => {
 	}
 
 	currentDialCount++;
+	currentTime = Date.now();
 
 	console.log('Dial event ' + currentDialCount + ' Time: ' + timeDiff);
-
-	currentTime = Date.now();
 }
 
 DialingCompleted = (value) => {
