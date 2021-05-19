@@ -29,7 +29,8 @@ app.listen(3000, () => {
 
 let totalDialCount = 0;//nee another for 0
 let currentDialCount = 0;//nee another for 0
-var DialTimerId = 0;
+let DialTimerId = 0;
+let currentTime = 0;
 
 
 //Hook Switch
@@ -64,6 +65,8 @@ HookSwitchDisengaged = () => {
 DialerEngaged = () => {
 	console.log('Dialer Engaged');
 	//clearInterval(DialTimerId);
+
+	
 	
 }
 
@@ -90,8 +93,13 @@ DialerDisengaged = () => {
 }
 
 DialerTick = () => {
+
+	var time = new Date();
+
 	currentDialCount++;
-	console.log('Dial event ' + currentDialCount);
+	console.log('Dial event ' + currentDialCount + 'Time: ' + d.getMilliseconds() - currentTime);
+
+	currentTime = new Date();
 }
 
 DialingCompleted = (value) => {
