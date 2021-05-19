@@ -102,13 +102,8 @@ DialerDisengaged = () => {
 }
 
 DialerTick = () => {
-
-
-
 	currentDialCount++;
-	
-
-	console.log('Dial event ' + currentDialCount + ' Time: ' + timeDiff);
+	console.log('Dial event ' + currentDialCount);
 }
 
 DialingCompleted = (value) => {
