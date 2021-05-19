@@ -36,21 +36,21 @@ let currentTime = 0;
 //Hook Switch
 rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(37, (pin) => {
-	if(BounceDetected()) return;
+	if(BounceDetected(pin)) return;
 	rpio.read(pin) ? HookSwitchEngaged() : HookSwitchDisengaged();
 });
 
 //Dialer Engaged
 rpio.open(35, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(35, (pin) => {
-	if(BounceDetected()) return;
+	if(BounceDetected(pin)) return;
 	rpio.read(pin) ? DialerDisengaged() : DialerEngaged();
 });
 
 //Dialer tick
 rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
-	if(BounceDetected()) return;
+	if(BounceDetected(pin)) return;
 	if(rpio.read(pin)){
 		DialerTick()
 	}
@@ -61,7 +61,7 @@ BounceDetected = () =>{
 	let timeDiff = millis - currentTime;
 
 	if(timeDiff < 50){
-		console.log('Bounce Detected Time: ' + timeDiff);
+		console.log('Bounce Detected On Pin: ' + pin + ' Time: ' + timeDiff);
 		return true;
 	}
 	currentTime = Date.now();
