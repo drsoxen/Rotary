@@ -36,22 +36,38 @@ let currentTime = 0;
 //Hook Switch
 rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(37, (pin) => {
+	if(BounceDetected()) return;
 	rpio.read(pin) ? HookSwitchEngaged() : HookSwitchDisengaged();
 });
 
 //Dialer Engaged
 rpio.open(35, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(35, (pin) => {
+	if(BounceDetected()) return;
 	rpio.read(pin) ? DialerDisengaged() : DialerEngaged();
 });
 
 //Dialer tick
 rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
+	if(BounceDetected()) return;
 	if(rpio.read(pin)){
 		DialerTick()
 	}
 });
+
+BounceDetected = () =>{
+	let millis = Date.now();
+	let timeDiff = millis - currentTime;
+
+	if(timeDiff < 50){
+		console.log('Bounce Detected Time: ' + timeDiff);
+		return true;
+	}
+	currentTime = Date.now();
+
+	return false;
+}
 
 HookSwitchEngaged = () => {
 	console.log('Hook Switch Engaged');
@@ -87,15 +103,10 @@ DialerDisengaged = () => {
 
 DialerTick = () => {
 
-	let millis = Date.now();
-	let timeDiff = millis - currentTime;
 
-	if(timeDiff < 50){
-		return;
-	}
 
 	currentDialCount++;
-	currentTime = Date.now();
+	
 
 	console.log('Dial event ' + currentDialCount + ' Time: ' + timeDiff);
 }
@@ -105,25 +116,25 @@ DialingCompleted = (value) => {
 	console.log('Dial Value: ' + value);
 	
 	switch(value) {
-	  case 1:
+	  case '1':
 	    break;
-	  case 2:
+	  case '2':
 	    break;
-	  case 3:
+	  case '3':
 	    break;
-	  case 4:
+	  case '4':
 	    break;
-	  case 5:
+	  case '5':
 	    break;
-	  case 6:
+	  case '6':
 	    break;
-	  case 7:
+	  case '7':
 	    break;
-	  case 8:
+	  case '8':
 	    break;
-	  case 9:
+	  case '9':
 	    break;
-	  case 0:
+	  case '0':
 	    break;
 	  case '01189998819991197253':
 	  	player.play('./public/audio/EmergencyServices.mp3')
@@ -132,9 +143,6 @@ DialingCompleted = (value) => {
 	  default:
 	  break;
 	}
-
-	currentDialCount = 0;
-
 }
 
 
