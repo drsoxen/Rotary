@@ -98,9 +98,11 @@ DialerTick = () => {
 
 	let timeDiff = millis - currentTime;
 
-	if(timeDiff > 50){
-		currentDialCount++;
+	if(timeDiff < 50){
+		return;
 	}
+
+	currentDialCount++;
 
 	console.log('Dial event ' + currentDialCount + ' Time: ' + timeDiff);
 
