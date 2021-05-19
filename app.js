@@ -97,7 +97,7 @@ DialerTick = () => {
 	var time = new Date();
 
 	currentDialCount++;
-	console.log('Dial event ' + currentDialCount + 'Time: ' + d.getMilliseconds() - currentTime);
+	console.log('Dial event ' + currentDialCount + 'Time: ' + time.getMilliseconds() - currentTime);
 
 	currentTime = new Date();
 }
