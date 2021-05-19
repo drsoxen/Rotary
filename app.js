@@ -31,6 +31,7 @@ let totalDialCount = '';
 let currentDialCount = 0;
 let DialTimerId = 0;
 let currentTime = 0;
+let lastPin = 0;
 
 
 //Hook Switch
@@ -57,6 +58,12 @@ rpio.poll(33, (pin) => {
 });
 
 BounceDetected = (pin) =>{
+
+	if (pin != lastPin){
+		lastPin = pin;
+		return false;
+	}
+
 	let millis = Date.now();
 	let timeDiff = millis - currentTime;
 
