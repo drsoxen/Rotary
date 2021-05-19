@@ -27,65 +27,71 @@ app.listen(3000, () => {
 
 });
 
-let currentDialCount = 0;
+let totalDialCount = 0;//nee another for 0
+let currentDialCount = 0;//nee another for 0
 var DialTimerId = 0;
 
 
 //Hook Switch
 rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(37, (pin) => {
-
-	if(rpio.read(pin))
-	{
-		console.log('Hook Switch Engaged');
-		currentDialCount = 0;
-	}
-	else
-	{
-		console.log('Hook Switch Disengaged');
-	}
-
+	rpio.read(pin) ? HookSwitchEngaged() : HookSwitchDisengaged();
 });
-
 
 //Dialer Engaged
 rpio.open(35, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(35, (pin) => {
-
-	if(rpio.read(pin))
-	{
-		console.log('Dialer Disengaged');
-		// DialTimerId = setInterval(() => {
-
-		// DialingCompleted(currentDialCount)
-
-		// }, 2000);
-
-		console.log(currentDialCount);
-	}
-	else
-	{
-		console.log('Dialer Engaged');
-		//clearInterval(DialTimerId);
-		currentDialCount *= 10;
-	}
-
+	rpio.read(pin) ? DialerDisengaged() : DialerEngaged();
 });
-
 
 //Dialer tick
 rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
-
-
-	if(rpio.read(pin))
-	{
-		currentDialCount++;
-		console.log('Dial event');
-	} 
-	
-
+	if(rpio.read(pin)){
+		DialerTick()
+	}
 });
+
+HookSwitchEngaged = () => {
+	console.log('Hook Switch Engaged');
+	totalDialCount = 0;
+}
+
+HookSwitchDisengaged = () => {
+	console.log('Hook Switch Disengaged');
+}
+
+DialerEngaged = () => {
+	console.log('Dialer Engaged');
+	//clearInterval(DialTimerId);
+	
+}
+
+DialerDisengaged = () => {
+	console.log('Dialer Disengaged');
+
+	console.log(totalDialCount);
+
+	// DialTimerId = setInterval(() => {
+	// DialingCompleted(totalDialCount)
+	// }, 2000);
+
+	totalDialCount *= 10;
+
+	if(currentDialCount == 10){
+		currentDialCount = 0;
+	}
+
+	totalDialCount += currentDialCount;
+
+
+	currentDialCount = 0;
+}
+
+DialerTick = () => {
+	currentDialCount++;
+	console.log('Dial event');
+}
 
 DialingCompleted = (value) => {
 
