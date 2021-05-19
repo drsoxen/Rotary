@@ -27,8 +27,8 @@ app.listen(3000, () => {
 
 });
 
-let totalDialCount = 0;//nee another for 0
-let currentDialCount = 0;//nee another for 0
+let totalDialCount = '';
+let currentDialCount = 0;
 let DialTimerId = 0;
 let currentTime = 0;
 
@@ -55,7 +55,7 @@ rpio.poll(33, (pin) => {
 
 HookSwitchEngaged = () => {
 	console.log('Hook Switch Engaged');
-	totalDialCount = 0;
+	totalDialCount = '';
 }
 
 HookSwitchDisengaged = () => {
@@ -64,28 +64,23 @@ HookSwitchDisengaged = () => {
 
 DialerEngaged = () => {
 	console.log('Dialer Engaged');
-	//clearInterval(DialTimerId);
-
-	
-	
+	//clearInterval(DialTimerId);	
 }
 
 DialerDisengaged = () => {
 	console.log('Dialer Disengaged');
 
-	
-
 	// DialTimerId = setInterval(() => {
 	// DialingCompleted(totalDialCount)
 	// }, 2000);
 
-	totalDialCount *= 10;
+	//totalDialCount *= 10;
 
 	if(currentDialCount == 10){
 		currentDialCount = 0;
 	}
 
-	totalDialCount += currentDialCount;
+	totalDialCount = totalDialCount + currentDialCount;
 
 	currentDialCount = 0;
 
@@ -134,7 +129,7 @@ DialingCompleted = (value) => {
 	    break;
 	  case 0:
 	    break;
-	  case 01189998819991197253:
+	  case '01189998819991197253':
 	  	player.play('./public/audio/EmergencyServices.mp3')
 	    break;
 
