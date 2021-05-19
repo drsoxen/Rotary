@@ -70,7 +70,7 @@ DialerEngaged = () => {
 DialerDisengaged = () => {
 	console.log('Dialer Disengaged');
 
-	console.log(totalDialCount);
+	
 
 	// DialTimerId = setInterval(() => {
 	// DialingCompleted(totalDialCount)
@@ -84,8 +84,9 @@ DialerDisengaged = () => {
 
 	totalDialCount += currentDialCount;
 
-
 	currentDialCount = 0;
+
+	console.log(totalDialCount);
 }
 
 DialerTick = () => {
