@@ -137,6 +137,10 @@ DialingCompleted = (value) => {
 	  case '9':
 	    break;
 	  case '0':
+	  	player.play('./public/audio/DialTone.mp3')
+	    break;
+	  case '411':
+	  	player.play('./public/audio/GeorgeCostanza.mp3')
 	    break;
 	  case '01189998819991197253':
 	  	player.play('./public/audio/EmergencyServices.mp3')
