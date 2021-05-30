@@ -33,19 +33,49 @@ let DialTimerId = 0;
 let currentTime = 0;
 let lastPin = 0;
 
+let hookEngaged = true;
+let dialerEngaged = false;
+
 
 //Hook Switch
 rpio.open(37, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(37, (pin) => {
 	if(BounceDetected(pin)) return;
-	rpio.read(pin) ? HookSwitchEngaged() : HookSwitchDisengaged();
+
+	if(rpio.read(pin))
+	{
+		if(!hookEngaged)
+		{
+			HookSwitchEngaged()
+		}
+	}
+	else
+	{
+		if(hookEngaged)
+		{
+			HookSwitchDisengaged()
+		}
+	}
 });
 
 //Dialer Engaged
 rpio.open(35, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(35, (pin) => {
 	if(BounceDetected(pin)) return;
-	rpio.read(pin) ? DialerDisengaged() : DialerEngaged();
+	if(rpio.read(pin))
+	{
+		if(dialerEngaged)
+		{
+			DialerDisengaged()
+		}
+	}
+	else
+	{
+		if(!dialerEngaged)
+		{
+			DialerEngaged()
+		}
+	}
 });
 
 //Dialer tick
@@ -78,20 +108,24 @@ BounceDetected = (pin) =>{
 
 HookSwitchEngaged = () => {
 	console.log('Hook Switch Engaged');
+	hookEngaged = true;
 	totalDialCount = '';
 }
 
 HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
+	hookEngaged = false;
 }
 
 DialerEngaged = () => {
 	console.log('Dialer Engaged');
+	dialerEngaged = true;
 	clearInterval(DialTimerId);	
 }
 
 DialerDisengaged = () => {
 	console.log('Dialer Disengaged');
+	dialerEngaged = false;
 
 	DialTimerId = setInterval(() => {
 		DialingCompleted(totalDialCount);
