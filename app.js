@@ -61,6 +61,7 @@ rpio.poll(37, (pin) => {
 //Dialer Engaged
 rpio.open(35, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(35, (pin) => {
+	if(hookEngaged) return;
 	if(BounceDetected(pin)) return;
 	if(rpio.read(pin))
 	{
@@ -81,6 +82,7 @@ rpio.poll(35, (pin) => {
 //Dialer tick
 rpio.open(33, rpio.INPUT, rpio.PULL_UP);
 rpio.poll(33, (pin) => {
+	if(!dialerEngaged) return;
 	if(rpio.read(pin)){
 		if(BounceDetected(pin)) return;
 		DialerTick()
