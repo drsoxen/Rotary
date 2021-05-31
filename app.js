@@ -114,7 +114,10 @@ HookSwitchEngaged = () => {
 	hookEngaged = true;
 	totalDialCount = '';
 
-	currentAudio.kill();
+	// if(currentAudio)
+	// {
+	// 	currentAudio.kill();
+	// }
 }
 
 HookSwitchDisengaged = () => {
