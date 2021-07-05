@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 
 const config = {
   auth: {
-    keyFilePath: path.resolve(__dirname, '/public/auth/credentials.json'),
-    savedTokensPath: path.resolve(__dirname, '/public/auth/tokens.json'), // where you want the tokens to be saved
+    keyFilePath: path.resolve(__dirname, './public/auth/credentials.json'),
+    savedTokensPath: path.resolve(__dirname, './public/auth/tokens.json'), // where you want the tokens to be saved
   },
   conversation: {
     audio: {
