@@ -8,7 +8,6 @@ var express = require('express'),
     rpio = require('rpio'),
     record = require('node-record-lpcm16'),
 	Speaker = require('speaker'),
-	path = require('path'),
 	GoogleAssistant = require('./index'),
 	speakerHelper = require('./speaker-helper');
 
