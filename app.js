@@ -244,6 +244,7 @@ DialingCompleted = (value) => {
 	  case '4':
 	    break;
 	  case '5':
+	  	SendTextRequest('Set livingroom lights to 50%');
 	    break;
 	  case '6':
 	    break;
@@ -266,6 +267,20 @@ DialingCompleted = (value) => {
 	  default:
 	  break;
 	}
+}
+
+SendTextRequest = (request) => {
+	config.conversation.textQuery = request;
+    
+	const assistant = new GoogleAssistant(config.auth);
+	assistant
+	  .on('ready', () => {
+	    // start a conversation!
+	    assistant.start(config.conversation, startConversation);
+	  })
+	  .on('error', (error) => {
+	    console.log('Assistant Error:', error);
+	  });
 }
 
 
