@@ -187,17 +187,17 @@ HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
 	hookEngaged = false;
 
-	// setup the assistant
-	const assistant = new GoogleAssistant(config.auth);
-	assistant
-	  .on('ready', () => {
-	    // start a conversation!
-	    assistant.start(config.conversation);
-	  })
-	  .on('started', startConversation)
-	  .on('error', (error) => {
-	    console.log('Assistant Error:', error);
-	  });
+	// // setup the assistant
+	// const assistant = new GoogleAssistant(config.auth);
+	// assistant
+	//   .on('ready', () => {
+	//     // start a conversation!
+	//     assistant.start(config.conversation);
+	//   })
+	//   .on('started', startConversation)
+	//   .on('error', (error) => {
+	//     console.log('Assistant Error:', error);
+	//   });
 }
 
 DialerEngaged = () => {
