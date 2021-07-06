@@ -65,6 +65,7 @@ const startConversation = (conversation) => {
         console.log('Conversation Ended Error:', error);
       } else {
         console.log('Conversation Complete');
+        delete config.conversation.textQuery;
         conversation.end();
       }
     })
