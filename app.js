@@ -39,6 +39,8 @@ const config = {
   },
 };
 
+let currentConversation;
+
 const startConversation = (conversation) => {
   console.log('Say something!');
   let openMicAgain = false;
@@ -187,23 +189,27 @@ HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
 	hookEngaged = false;
 
-	// // setup the assistant
-	// const assistant = new GoogleAssistant(config.auth);
-	// assistant
-	//   .on('ready', () => {
-	//     // start a conversation!
-	//     assistant.start(config.conversation);
-	//   })
-	//   .on('started', startConversation)
-	//   .on('error', (error) => {
-	//     console.log('Assistant Error:', error);
-	//   });
+	currentConversation = startConversation;
+
+	// setup the assistant
+	const assistant = new GoogleAssistant(config.auth);
+	assistant
+	  .on('ready', () => {
+	    // start a conversation!
+	    assistant.start(config.conversation);
+	  })
+	  .on('started', currentConversation)
+	  .on('error', (error) => {
+	    console.log('Assistant Error:', error);
+	  });
 }
 
 DialerEngaged = () => {
 	console.log('Dialer Engaged');
 	dialerEngaged = true;
 	clearInterval(DialTimerId);	
+
+	currentConversation.end();
 }
 
 DialerDisengaged = () => {
