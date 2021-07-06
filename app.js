@@ -72,7 +72,7 @@ const startConversation = (conversation) => {
 
   // pass the mic audio to the assistant
   const mic = record.start({ threshold: 0 });
-  mic.on('data', data => conversation.write(data));
+  //mic.on('data', data => conversation.write(data));
 
   // setup the speaker
   const speaker = new Speaker({
@@ -195,9 +195,9 @@ HookSwitchDisengaged = () => {
 	    assistant.start(config.conversation);
 	  })
 	  .on('started', startConversation)
-	  // .on('error', (error) => {
-	  //   console.log('Assistant Error:', error);
-	  // });
+	  .on('error', (error) => {
+	    console.log('Assistant Error:', error);
+	  });
 }
 
 DialerEngaged = () => {
