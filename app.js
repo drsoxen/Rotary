@@ -63,8 +63,6 @@ const startConversation = (conversation) => {
     .on('ended', (error, continueConversation) => {
       if (error) {
         console.log('Conversation Ended Error:', error);
-      } else if (continueConversation) {
-        promptForInput();
       } else {
         console.log('Conversation Complete');
         conversation.end();
