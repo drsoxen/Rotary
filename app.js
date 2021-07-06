@@ -61,13 +61,9 @@ const startConversation = (conversation) => {
     .on('device-action', action => console.log('Device Action:', action))
     // once the conversation is ended, see if we need to follow up
     .on('ended', (error, continueConversation) => {
-      if (error) {
-        console.log('Conversation Ended Error:', error);
-      } else {
-        console.log('Conversation Complete');
-        delete config.conversation.textQuery;
-        conversation.end();
-      }
+      if (error) console.log('Conversation Ended Error:', error);
+      else if (continueConversation) openMicAgain = true;
+      else console.log('Conversation Complete');
     })
     // catch any errors
     .on('error', (error) => {
