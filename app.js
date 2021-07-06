@@ -189,15 +189,15 @@ HookSwitchDisengaged = () => {
 
 	// setup the assistant
 	const assistant = new GoogleAssistant(config.auth);
-	assistant
-	  .on('ready', () => {
-	    // start a conversation!
-	    assistant.start(config.conversation);
-	  })
-	  .on('started', startConversation)
-	  .on('error', (error) => {
-	    console.log('Assistant Error:', error);
-	  });
+	// assistant
+	//   .on('ready', () => {
+	//     // start a conversation!
+	//     assistant.start(config.conversation);
+	//   })
+	//   .on('started', startConversation)
+	//   .on('error', (error) => {
+	//     console.log('Assistant Error:', error);
+	//   });
 }
 
 DialerEngaged = () => {
