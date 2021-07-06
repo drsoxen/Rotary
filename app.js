@@ -70,9 +70,9 @@ const startConversation = (conversation) => {
       console.log('Conversation Error:', error);
     });
 
-  // // pass the mic audio to the assistant
-  // const mic = record.start({ threshold: 0 });
-  // mic.on('data', data => conversation.write(data));
+  // pass the mic audio to the assistant
+  const mic = record.start({ threshold: 0, recordProgram: 'arecord', device: 'plughw:1,0' });
+  mic.on('data', data => conversation.write(data));
 
   // setup the speaker
   const speaker = new Speaker({
