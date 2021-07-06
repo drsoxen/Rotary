@@ -11,6 +11,9 @@ var express = require('express'),
 	GoogleAssistant = require('./index'),
 	speakerHelper = require('./speaker-helper');
 
+
+console.log('Ready');
+
 // app.engine('dust', cons.dust);
 
 
