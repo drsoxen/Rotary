@@ -74,21 +74,21 @@ const startConversation = (conversation) => {
   // const mic = record.start({ threshold: 0 });
   // mic.on('data', data => conversation.write(data));
 
-  // // setup the speaker
-  // const speaker = new Speaker({
-  //   channels: 1,
-  //   sampleRate: config.conversation.audio.sampleRateOut,
-  // });
-  // speakerHelper.init(speaker);
-  // speaker
-  //   .on('open', () => {
-  //     console.log('Assistant Speaking');
-  //     speakerHelper.open();
-  //   })
-  //   .on('close', () => {
-  //     console.log('Assistant Finished Speaking');
-  //     if (openMicAgain) assistant.start(config.conversation);
-  //   });
+  // setup the speaker
+  const speaker = new Speaker({
+    channels: 1,
+    sampleRate: config.conversation.audio.sampleRateOut,
+  });
+  speakerHelper.init(speaker);
+  speaker
+    .on('open', () => {
+      console.log('Assistant Speaking');
+      speakerHelper.open();
+    })
+    .on('close', () => {
+      console.log('Assistant Finished Speaking');
+      if (openMicAgain) assistant.start(config.conversation);
+    });
 };
 
 app.listen(3000, () => {
