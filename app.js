@@ -69,17 +69,20 @@ const startConversation = (conversation) => {
     .on('error', (error) => {
       console.log('Conversation Error:', error);
     });
-
+console.log('1');
   // pass the mic audio to the assistant
   const mic = record.start({ threshold: 0 });
   mic.on('data', data => conversation.write(data));
+  console.log('2');
 
   // setup the speaker
   const speaker = new Speaker({
     channels: 1,
     sampleRate: config.conversation.audio.sampleRateOut,
   });
+console.log('3');
   speakerHelper.init(speaker);
+  console.log('4');
   speaker
     .on('open', () => {
       console.log('Assistant Speaking');
@@ -189,6 +192,7 @@ HookSwitchDisengaged = () => {
 
 	// setup the assistant
 	const assistant = new GoogleAssistant(config.auth);
+console.log('5');
 	assistant
 	  .on('ready', () => {
 	    // start a conversation!
