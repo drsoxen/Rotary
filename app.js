@@ -194,7 +194,7 @@ HookSwitchDisengaged = () => {
 	    // start a conversation!
 	    assistant.start(config.conversation);
 	  })
-	  // .on('started', startConversation)
+	  .on('started', startConversation)
 	  // .on('error', (error) => {
 	  //   console.log('Assistant Error:', error);
 	  // });
