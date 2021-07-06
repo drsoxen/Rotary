@@ -47,6 +47,7 @@ const startConversation = (conversation) => {
   conversation
     // send the audio buffer to the speaker
     .on('audio-data', (data) => {
+      console.log('audio-data');
       speakerHelper.update(data);
     })
     // done speaking, close the mic
@@ -61,6 +62,7 @@ const startConversation = (conversation) => {
     .on('device-action', action => console.log('Device Action:', action))
     // once the conversation is ended, see if we need to follow up
     .on('ended', (error, continueConversation) => {
+    	console.log('ended');
       if (error) console.log('Conversation Ended Error:', error);
       else if (continueConversation) openMicAgain = true;
       else console.log('Conversation Complete');
@@ -74,21 +76,21 @@ const startConversation = (conversation) => {
   const mic = record.start({ threshold: 0 });
   mic.on('data', data => conversation.write(data));
 
-  // // setup the speaker
-  // const speaker = new Speaker({
-  //   channels: 1,
-  //   sampleRate: config.conversation.audio.sampleRateOut,
-  // });
-  // speakerHelper.init(speaker);
-  // speaker
-  //   .on('open', () => {
-  //     console.log('Assistant Speaking');
-  //     speakerHelper.open();
-  //   })
-  //   .on('close', () => {
-  //     console.log('Assistant Finished Speaking');
-  //     if (openMicAgain) assistant.start(config.conversation);
-  //   });
+  // setup the speaker
+  const speaker = new Speaker({
+    channels: 1,
+    sampleRate: config.conversation.audio.sampleRateOut,
+  });
+  speakerHelper.init(speaker);
+  speaker
+    .on('open', () => {
+      console.log('Assistant Speaking');
+      speakerHelper.open();
+    })
+    .on('close', () => {
+      console.log('Assistant Finished Speaking');
+      if (openMicAgain) assistant.start(config.conversation);
+    });
 };
 
 app.listen(3000, () => {
