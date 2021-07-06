@@ -11,20 +11,20 @@ var express = require('express'),
 	GoogleAssistant = require('./index'),
 	speakerHelper = require('./speaker-helper');
 
-app.engine('dust', cons.dust);
+// app.engine('dust', cons.dust);
 
 
-app.set('view engine', 'dust');
-app.set('views', __dirname + '/views');
+// app.set('view engine', 'dust');
+// app.set('views', __dirname + '/views');
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false}));
 
-app.get('/', (req, res) => {
-  res.render('index');
-});
+// app.get('/', (req, res) => {
+//   res.render('index');
+// });
 
 const config = {
   auth: {
@@ -91,10 +91,10 @@ const startConversation = (conversation) => {
     });
 };
 
-app.listen(3000, () => {
-  console.log('Server Started On Port 3000');
+// app.listen(3000, () => {
+//   console.log('Server Started On Port 3000');
 
-});
+// });
 
 let totalDialCount = '';
 let currentDialCount = 0;
