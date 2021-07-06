@@ -26,8 +26,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-let currentAssistant;
-
 const config = {
   auth: {
     keyFilePath: path.resolve(__dirname, './public/auth/credentials.json'),
@@ -190,11 +188,11 @@ HookSwitchDisengaged = () => {
 	hookEngaged = false;
 
 	// setup the assistant
-	currentAssistant = new GoogleAssistant(config.auth);
-	currentAssistant
+	const assistant = new GoogleAssistant(config.auth);
+	assistant
 	  .on('ready', () => {
 	    // start a conversation!
-	    currentAssistant.start(config.conversation);
+	    assistant.start(config.conversation);
 	  })
 	  .on('started', startConversation)
 	  .on('error', (error) => {
@@ -274,10 +272,11 @@ DialingCompleted = (value) => {
 SendTextRequest = (request) => {
 	config.conversation.textQuery = request;
     
-	currentAssistant
+	const assistant = new GoogleAssistant(config.auth);
+	assistant
 	  .on('ready', () => {
 	    // start a conversation!
-	    currentAssistant.start(config.conversation, startConversation);
+	    assistant.start(config.conversation, startConversation);
 	  })
 	  .on('error', (error) => {
 	    console.log('Assistant Error:', error);
