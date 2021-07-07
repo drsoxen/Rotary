@@ -67,7 +67,6 @@ const startConversation = (conversation) => {
       {
       	console.log('Conversation Complete');
       	//conversation.end();
-      	config.conversation.isNew = false;
       	if(config.conversation.textQuery)
       	{
       		delete config.conversation.textQuery;
