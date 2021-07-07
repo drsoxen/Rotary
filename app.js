@@ -192,7 +192,6 @@ HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
 	hookEngaged = false;
 
-	config.conversation.isNew = true;
 	// setup the assistant
 	const assistant = new GoogleAssistant(config.auth);
 	assistant
