@@ -68,6 +68,10 @@ const startConversation = (conversation) => {
       	console.log('Conversation Complete');
       	conversation.end();
       	config.conversation.isNew = false;
+      	if(config.conversation.textQuery)
+      	{
+      		delete config.conversation.textQuery;
+      	}
   	  }
     })
     // catch any errors
@@ -191,6 +195,8 @@ HookSwitchEngaged = () => {
 HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
 	hookEngaged = false;
+
+	config.conversation.isNew = true;
 
 	// setup the assistant
 	const assistant = new GoogleAssistant(config.auth);
