@@ -63,7 +63,12 @@ const startConversation = (conversation) => {
     .on('ended', (error, continueConversation) => {
       if (error) console.log('Conversation Ended Error:', error);
       else if (continueConversation) openMicAgain = true;
-      else console.log('Conversation Complete');
+      else 
+      {
+      	console.log('Conversation Complete');
+      	conversation.end();
+      	config.conversation.isNew = false;
+  	  }
     })
     // catch any errors
     .on('error', (error) => {
@@ -187,6 +192,7 @@ HookSwitchDisengaged = () => {
 	console.log('Hook Switch Disengaged');
 	hookEngaged = false;
 
+	config.conversation.isNew = true;
 	// setup the assistant
 	const assistant = new GoogleAssistant(config.auth);
 	assistant
@@ -271,6 +277,7 @@ DialingCompleted = (value) => {
 
 SendTextRequest = (request) => {
 	config.conversation.textQuery = request;
+	config.conversation.isNew = true;
     
 	const assistant = new GoogleAssistant(config.auth);
 	assistant
