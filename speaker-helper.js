@@ -17,15 +17,15 @@ const update = (data) => {
   if (!speaker) return;
 
   const now = new Date().getTime();
-  speaker.write(data);
+  speaker.write(data, (err) => { speaker.end(); });
 
-  // kill the speaker after enough data has been sent to it and then let it flush out
-  spokenResponseLength += data.length;
-  const audioTime = spokenResponseLength / (24000 * 16 / 8) * 1000;
-  clearTimeout(speakerTimer);
-  speakerTimer = setTimeout(() => {
-    speaker.end();
-  }, audioTime - Math.max(0, now - speakerOpenTime));
+  // // kill the speaker after enough data has been sent to it and then let it flush out
+  // spokenResponseLength += data.length;
+  // const audioTime = spokenResponseLength / (24000 * 16 / 8) * 1000;
+  // clearTimeout(speakerTimer);
+  // speakerTimer = setTimeout(() => {
+  //   speaker.end();
+  // }, audioTime - Math.max(0, now - speakerOpenTime));
 };
 
 module.exports = {
