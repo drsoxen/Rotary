@@ -17,7 +17,10 @@ const update = (data) => {
   if (!speaker) return;
 
   const now = new Date().getTime();
-  speaker.write(data, (err) => { speaker.end(); });
+  speaker.write(data, (err) => {
+    if (err) console.log(err);
+   speaker.end(); 
+ });
 
   // // kill the speaker after enough data has been sent to it and then let it flush out
   // spokenResponseLength += data.length;
