@@ -48,7 +48,7 @@ const getEncoding = (config, encodingOverride) => {
 const createRequest = (params) => {
   if (params === undefined) params = {};
 
-  sendingText = false;
+  //sendingText = false;
 
   // build out the request config
   const assistConfig = {};
