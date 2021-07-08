@@ -252,6 +252,7 @@ DialingCompleted = (value) => {
 	
 	switch(value) {
 	  case '1':
+	  	SendTextRequest('Set livingroom lights to 100%');
 	    break;
 	  case '2':
 	    break;
