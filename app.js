@@ -8,8 +8,7 @@ var express = require('express'),
     rpio = require('rpio'),
     record = require('node-record-lpcm16'),
 	Speaker = require('speaker'),
-	GoogleAssistant = require('./index'),
-	speakerHelper = require('./speaker-helper');
+	GoogleAssistant = require('./index');
 
 app.engine('dust', cons.dust);
 
@@ -42,13 +41,13 @@ const config = {
 const startConversation = (conversation) => {
   console.log('Say something!');
   let openMicAgain = false;
-
+  let speaker;
 
   // setup the conversation
   conversation
     // send the audio buffer to the speaker
     .on('audio-data', (data) => {
-      speakerHelper.update(data);
+        speaker.write(data, (err) => { speaker.end(); });
     })
     // done speaking, close the mic
     .on('end-of-utterance', () => record.stop())
@@ -81,21 +80,16 @@ const startConversation = (conversation) => {
 
     if(!config.conversation.textQuery)
     {
-    	console.log('starting mic and speaker');
-	  // pass the mic audio to the assistant
 	  const mic = record.start({ threshold: 0, recordProgram: 'arecord', device: 'plughw:1,0' });
 	  mic.on('data', data => conversation.write(data));
 
-	  // setup the speaker
-	  const speaker = new Speaker({
+	  speaker = new Speaker({
 	    channels: 1,
 	    sampleRate: config.conversation.audio.sampleRateOut,
 	  });
-	  speakerHelper.init(speaker);
 	  speaker
 	    .on('open', () => {
 	      console.log('Assistant Speaking');
-	      speakerHelper.open();
 	    })
 	    .on('close', () => {
 	      console.log('Assistant Finished Speaking');
