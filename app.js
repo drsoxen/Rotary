@@ -43,7 +43,6 @@ const startConversation = (conversation) => {
   console.log('Say something!');
   let openMicAgain = false;
 
-  console.log(JSON.stringify(config));
 
   // setup the conversation
   conversation
@@ -82,7 +81,7 @@ const startConversation = (conversation) => {
 
     if(!config.conversation.textQuery)
     {
-
+    	console.log('starting mic and speaker');
 	  // pass the mic audio to the assistant
 	  const mic = record.start({ threshold: 0, recordProgram: 'arecord', device: 'plughw:1,0' });
 	  mic.on('data', data => conversation.write(data));
