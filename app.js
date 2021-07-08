@@ -43,6 +43,8 @@ const startConversation = (conversation) => {
   console.log('Say something!');
   let openMicAgain = false;
 
+  console.log(JSON.stringify(config));
+
   // setup the conversation
   conversation
     // send the audio buffer to the speaker
