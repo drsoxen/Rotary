@@ -262,6 +262,7 @@ DialingCompleted = (value) => {
 	  case '6':
 	    break;
 	  case '7':
+	  	SendTextRequest('Set livingroom lights to 75%');
 	    break;
 	  case '8':
 	    break;
