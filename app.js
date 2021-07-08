@@ -47,7 +47,10 @@ const startConversation = (conversation) => {
   conversation
     // send the audio buffer to the speaker
     .on('audio-data', (data) => {
-        speaker.write(data, (err) => { /*speaker.end();*/ });
+    	if(!config.conversation.textQuery)
+    	{
+        	speaker.write(data, (err) => { /*speaker.end();*/ });
+    	}
     })
     // done speaking, close the mic
     .on('end-of-utterance', () => record.stop())
